@@ -1,0 +1,59 @@
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #d8d8d8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.logo{
+    width: 100px;
+    height: auto;
+}
+.gmail{
+    width: 90px;
+    height: auto;
+    cursor: pointer;
+}
+
+.Contenido h1{
+    text-align: center;
+    margin-top: 50px;
+    font-size: 36px;
+    color: #333;
+}
+
+.Card{
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    text-align: center;
+
+}
+.Card a{
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+
+footer{
+    text-align: center;
+    padding: 0px 0px;
+    background-color: #d8d8d8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
