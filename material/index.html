@@ -12,33 +12,27 @@
 
   <p id="resultado"></p>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script>
-    // ⚠️ Reemplaza con tus datos de Supabase
-    const SUPABASE_URL = "https://wttsqejhkvcetrnlvfvv.supabase.co";
-    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0dHNxZWpoa3ZjZXRybmx2ZnZ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgyMjQ3ODAsImV4cCI6MjA3MzgwMDc4MH0.AgkkNZ1BpVY8cCYYJYX5pBEYR4BnLgMV6aIvRctT4WY";
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const { createClient } = supabase
+  const supabaseClient = createClient("https://wttsqejhkvcetrnlvfvv.supabase.co", "TU_ANON_KEY")
 
-    document.getElementById("uploadBtn").addEventListener("click", async () => {
-      const file = document.getElementById("fileInput").files[0];
-      if (!file) {
-        alert("Selecciona un archivo primero.");
-        return;
-      }
+  document.getElementById("uploadBtn").addEventListener("click", async () => {
+    const file = document.getElementById("fileInput").files[0]
+    if (!file) return alert("Selecciona un archivo primero.")
 
-      // Subimos el archivo al bucket "uploads"
-      const { data, error } = await supabase.storage
-        .from("uploads")
-        .upload(`archivos/${Date.now()}-${file.name}`, file);
+    const { data, error } = await supabaseClient.storage
+      .from("uploads")
+      .upload(`archivos/${Date.now()}-${file.name}`, file)
 
-      if (error) {
-        document.getElementById("resultado").innerText = "Error: " + error.message;
-      } else {
-        // Obtenemos URL pública
-        const { publicUrl } = supabase.storage.from("uploads").getPublicUrl(data.path);
-        document.getElementById("resultado").innerHTML = `Archivo subido ✅ <a href="${publicUrl}" target="_blank">Ver archivo</a>`;
-      }
-    });
-  </script>
+    if (error) {
+      document.getElementById("resultado").innerText = "Error: " + error.message
+    } else {
+      const { data: publicData } = supabaseClient.storage.from("uploads").getPublicUrl(data.path)
+      document.getElementById("resultado").innerHTML = `Archivo subido ✅ <a href="${publicData.publicUrl}" target="_blank">Ver archivo</a>`
+    }
+  })
+</script>
+
 </body>
 </html>
